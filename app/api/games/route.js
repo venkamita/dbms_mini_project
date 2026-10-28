@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { pool } from '@/lib/mysql';
 import { getDb } from '@/lib/mongo';
-import { getUser } from '@/lib/auth';
-import { assert, id, route } from '@/lib/api';
+import { getUser, requireAdmin } from '@/lib/auth';
+import { assert, id, route, body } from '@/lib/api';
+import { saveGame } from '@/lib/admin-games';
 
 export const GET = route(async request => {
   const user = await getUser(request);
@@ -33,4 +34,9 @@ export const GET = route(async request => {
     result.sort((a, b) => order.get(a.game_id) - order.get(b.game_id));
   }
   return NextResponse.json(result);
+});
+export const POST = route(async request => {
+  await requireAdmin(request);
+  const game_id = await saveGame(await body(request));
+  return NextResponse.json({ game_id }, { status: 201 });
 });

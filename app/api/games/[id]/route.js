@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { pool } from '@/lib/mysql';
 import { getDb } from '@/lib/mongo';
-import { getUser } from '@/lib/auth';
-import { id, route, assert } from '@/lib/api';
+import { getUser, requireAdmin } from '@/lib/auth';
+import { id, route, assert, body } from '@/lib/api';
+import { saveGame } from '@/lib/admin-games';
 import { gameGenres, gamePlatforms } from '@/lib/games';
 
 export const GET = route(async (request, context) => {
@@ -25,4 +26,17 @@ export const GET = route(async (request, context) => {
     Object.assign(result, { myRating: ratings[0] || null, owned: owns.length > 0, wishlisted: wishes.length > 0 });
   }
   return NextResponse.json(result);
+});
+export const PUT = route(async (request, context) => {
+  await requireAdmin(request);
+  const gameId = id((await context.params).id);
+  await saveGame(await body(request), gameId);
+  return NextResponse.json({ game_id: gameId });
+});
+export const DELETE = route(async (request, context) => {
+  await requireAdmin(request);
+  const gameId = id((await context.params).id);
+  const [result] = await pool.execute('UPDATE Game SET is_active = FALSE WHERE game_id = ?', [gameId]);
+  assert(result.affectedRows, 'Game not found', 404);
+  return NextResponse.json({ ok: true });
 });
