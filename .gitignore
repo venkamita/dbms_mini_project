@@ -7,3 +7,6 @@ out/
 coverage/
 *.log
 .env.local
+output/
+.playwright-cli/
+.playwright/

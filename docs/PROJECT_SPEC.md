@@ -97,13 +97,13 @@ Hand-drawn diagrams: [`er-diagram.png`](er-diagram.png), [`relational-schema.png
 
 ```
 User(user_id, username, email, password_hash, role)
-Game(game_id, title, publisher, base_price, avg_rating, release_date)
+Game(game_id, title, publisher, base_price, avg_rating, release_date, is_active)
 Genre(genre_id, name)
 Platform(platform_id, name)
 Rates(user_id → User, game_id → Game, score, review_text)          PK(user_id, game_id)
 Adds(user_id → User, game_id → Game)                                PK(user_id, game_id)
 Owns(user_id → User, game_id → Game, price_paid)                    PK(user_id, game_id)
-Recommends(user_id → User, game_id → Game, method, score)           PK(user_id, game_id)
+Recommends(user_id → User, game_id → Game, method, score, content_score, collab_score, trending_score) PK(user_id, game_id)
 HasGenre(game_id → Game, genre_id → Genre)                          PK(game_id, genre_id)
 OnPlatform(game_id → Game, platform_id → Platform)                  PK(game_id, platform_id)
 ```
@@ -320,12 +320,13 @@ U1 is recommended Stardew Valley (0.77) over Celeste (0.18). The three parts are
 | `/api/recommendations/recompute` | POST | admin | function + procedure + aggregation → upsert `Recommends` |
 | `/api/admin/analytics` | GET | admin | `vw_top_rated_by_genre` + trending aggregation |
 
-**Libraries:** `mysql2/promise` (parameterised queries), official `mongodb` driver, `bcryptjs`, `jsonwebtoken` (JWT in an HTTP-only cookie).
+**Libraries:** `mysql2/promise` (parameterised queries), official `mongodb` driver, `bcryptjs` (cost 10), `jose` (HS256 JWT, seven days, HTTP-only `token` cookie). Next.js App Router, JavaScript, Tailwind CSS; client pages fetch the API routes.
 
 ## 13. Authentication and Authorization
 - Roles: `player`, `admin` (stored in `User.role`).
 - Passwords hashed with bcrypt; never stored or logged in plain text.
-- Every API route checks the JWT; admin routes also check `role = 'admin'` on the server, not just by hiding buttons.
+- Protected API handlers check the JWT and reload the user and role from MySQL; admin routes require `role = 'admin'`. Public routes remain readable without login.
+- `proxy.js` redirects unauthenticated users from protected pages and players from admin pages. This is the current Next.js 16 name for the spec's middleware convention; API authorization is independent.
 
 ## 14. Data Validation and Integrity
 - **MySQL:** NOT NULL, CHECK (score 1–5, prices ≥ 0, avg_rating 0–5, recommendation score 0–1, email format), UNIQUE (username, email), composite PKs (one rating / one purchase / one wishlist entry per user-game), ENUM (role, method), FKs with ON DELETE CASCADE, triggers for `avg_rating`, transaction for purchase.
@@ -338,17 +339,38 @@ U1 is recommended Stardew Valley (0.77) over Celeste (0.18). The three parts are
 
 ## 16. Test Cases
 
-| # | Test | Expected |
-|---|---|---|
-| T1 | Rate a game with score 7 | Rejected by `chk_rates_score` |
-| T2 | Rate the same game twice | Rejected (duplicate PK) |
-| T3 | Add a rating | `Game.avg_rating` updates (trigger) |
-| T4 | Buy a wishlisted game | Row in `Owns`, removed from `Adds` |
-| T5 | Buy an owned game | Error, nothing changes (rollback) |
-| T6 | Buy a non-existent game | "Game does not exist", rollback |
-| T7 | Insert activity with negative playtime | Rejected by MongoDB validator |
-| T8 | Player calls an admin route | 403 |
-| T9 | Recompute for U1 on seed data | G2 = 0.77, G4 = 0.18 |
+Verification recorded on **28 October 2026 (Asia/Kolkata)**. The user requested completion **without live database tests**. Existing databases were not reloaded or changed. Database-dependent outcomes below are deliberately unverified.
+
+| # | Test | Expected | Result |
+|---|---|---|---|
+| T1 | Rate a game with score 7 via API | 400 | Not run: live database tests skipped by request |
+| T2 | Rate the same game twice | 409 | Not run: live database tests skipped by request |
+| T3 | Add a rating and view game | Trigger-maintained average changes | Not run: live database tests skipped by request |
+| T4 | Buy a wishlisted game | In library, removed from wishlist | Not run: live database tests skipped by request |
+| T5 | Buy an owned game | 409; nothing changes | Not run: live database tests skipped by request |
+| T6 | Buy game 9999 | 400, "Game does not exist" | Not run: live database tests skipped by request |
+| T7 | Insert negative playtime | MongoDB validator rejects it | Not run: live database tests skipped by request |
+| T8 | Player calls `/api/admin/analytics` | 403 | Live test not run; offline role-enforcement test passes |
+| T9 | Recompute for U1 on fresh seed data | G2 = 0.7700, G4 = 0.1800, exactly | Live test not run; fixture-based orchestration test passes |
+| T10 | Search "pixel-art" | Stardew Valley and Celeste | Not run against MongoDB; UI filtering checked with fixtures |
+| T11 | Logged-out user opens `/library` | Redirect to `/login` | PASS: production HTTP response 307, Location `/login` |
+
+### Additional checks
+
+| Check | Actual result |
+|---|---|
+| `npm run build` | PASS: Next.js 16.4.3, Turbopack, all pages and API routes compiled |
+| `npm run lint` | PASS: zero errors or warnings after fixes |
+| `npm test` | PASS: 10 offline tests, zero failures |
+| Logged-out `/api/admin/analytics` | PASS: HTTP 401 |
+| Forged token at `/api/ratings` | PASS: HTTP 401 |
+| Browser preview | PASS: all nine pages rendered with API fixtures, no page runtime errors |
+| Mobile catalog | PASS: 390px viewport, no horizontal overflow |
+| Fixture UI interactions | PASS: search form renders two fixture results; Edit pre-fills metadata; invalid requirements JSON is rejected before submission |
+
+Offline tests cover JWT expiry/signature/claims, bcrypt cost and cookies, malformed JSON and game validation, database error mapping, fresh role checks, Mongo-failure SQL rollback, SQL-commit-failure Mongo compensation, BSON Int32 IDs, recommendation inserts and reasons, and one trending aggregation per batch. They use in-memory doubles and do **not** verify real SQL functions, triggers, transactions or MongoDB validators.
+
+Run `npm run test:integration -- --confirm-demo-db` later against disposable fresh seed databases with `.env.local` configured and the development server running. It exercises T1–T11 and writes `output/integration-results.json`; T3 checks the average returned to the game page, and T7 uses the official driver against the same validator demonstrated in `mongosh`.
 
 ## 17. Documentation / Demo Checklist
 - [ ] Objectives, functional requirements (§2, §4)
@@ -357,7 +379,28 @@ U1 is recommended Stardew Valley (0.77) over Celeste (0.18). The three parts are
 - [ ] Data dictionary (§8)
 - [ ] SQL / NoSQL implementation, important queries (§9, §10, `04_queries.sql`)
 - [ ] System architecture (§6)
-- [ ] Application screenshots — *add during development*
-- [ ] Testing results (§16) — *fill in actual results*
+- [x] Application screenshots — fixture previews below
+- [x] Testing results (§16) — actual outcomes recorded; live tests explicitly deferred
 - [ ] Individual contributions (table at top + Git history)
 - [ ] Conclusion — *add at submission*
+
+## Screenshots
+
+These screenshots show the actual application rendered with **intercepted API fixture responses**. Every image is visibly labeled **UI PREVIEW · FIXTURE DATA**. They are layout evidence, not proof of live database integration. The library preview uses an illustrative ownership row. Re-capture with real database results before final course submission.
+
+| Page | Screenshot |
+|---|---|
+| Login | [login.png](screenshots/login.png) |
+| Register | [register.png](screenshots/register.png) |
+| Catalog | [catalog.png](screenshots/catalog.png) |
+| Game detail | [game-detail.png](screenshots/game-detail.png) |
+| Wishlist | [wishlist.png](screenshots/wishlist.png) |
+| Library | [library.png](screenshots/library.png) |
+| Recommendations | [recommendations.png](screenshots/recommendations.png) |
+| Admin games | [admin-games.png](screenshots/admin-games.png) |
+| Admin analytics | [admin-analytics.png](screenshots/admin-analytics.png) |
+| Mobile catalog | [catalog-mobile.png](screenshots/catalog-mobile.png) |
+
+## Implementation conclusion
+
+The application layer now connects each requested workflow to its API and database objects: SQL holds relational state and transactional purchases; MongoDB supplies flexible metadata, text search and trending aggregation. Recommendations persist all three signals for explanation. Production compilation, offline tests and fixture-based UI review pass. Fresh database initialization and the complete live T1–T10 checks remain to be run after database configuration; they were intentionally skipped in this implementation session.

@@ -1,6 +1,6 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { api } from '@/lib/client';
 const Context = createContext({ user: null, loading: true });
@@ -10,13 +10,14 @@ export function SessionProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const pathname = usePathname();
+  const router = useRouter();
   useEffect(() => {
     let active = true;
     api('/api/auth/me').then(data => { if (active) { setUser(data.user); setError(''); } }).catch(err => { if (active) setError(err.message); }).finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
   }, [pathname]);
   async function logout() {
-    try { await api('/api/auth/logout', { method: 'POST' }); setUser(null); window.location.assign('/login'); }
+    try { await api('/api/auth/logout', { method: 'POST' }); setUser(null); router.replace('/login'); router.refresh(); }
     catch (err) { setError(err.message); }
   }
   const links = [['/catalog', 'Catalog'], ['/wishlist', 'Wishlist'], ['/library', 'Library'], ['/recommendations', 'For You']];
