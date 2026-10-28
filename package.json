@@ -4,6 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "test:integration": "node --env-file=.env.local scripts/test-integration.mjs",
     "seed:passwords": "node --env-file=.env.local scripts/set-seed-passwords.mjs"
-  }
+  },
+  "engines": { "node": ">=20.9.0" }
 }
