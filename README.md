@@ -1,6 +1,6 @@
 # GameMatch — Explainable Game Recommendation Platform
 
-DBMS Level 3 Project · Section H · Team 15 — Sharat Doddihal (PES1UG24CS430), Shashank Palcharla (PES1UG24CS436)
+DBMS Level 3 Project · Section H · Team 15 — Sharat Doddihal (PES1UG24CS430), Shashannk Palcharla (PES1UG24CS436)
 
 GameMatch recommends games with a score players can inspect: **content** (genres you rate highly, MySQL function) + **collaborative** (players who rate like you, MySQL procedure) + **trending** (recent playtime, MongoDB aggregation).
 
