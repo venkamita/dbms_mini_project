@@ -11,5 +11,22 @@
     "test:integration": "node --env-file=.env.local scripts/test-integration.mjs",
     "seed:passwords": "node --env-file=.env.local scripts/set-seed-passwords.mjs"
   },
-  "engines": { "node": ">=20.9.0" }
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "jose": "^6.2.13",
+    "mongodb": "^7.7.0",
+    "mysql2": "^3.24.6",
+    "next": "^16.4.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.3",
+    "tailwindcss": "^4.3.3"
+  }
 }
