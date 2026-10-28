@@ -28,6 +28,7 @@ CREATE TABLE Game (
   base_price   DECIMAL(8,2) NOT NULL DEFAULT 0.00,
   avg_rating   DECIMAL(3,2) NOT NULL DEFAULT 0.00,   -- maintained by triggers
   release_date DATE,
+  is_active    BOOLEAN NOT NULL DEFAULT TRUE,
   CONSTRAINT chk_game_price  CHECK (base_price >= 0),
   CONSTRAINT chk_game_rating CHECK (avg_rating BETWEEN 0 AND 5),
   FULLTEXT INDEX ft_game_title (title)                -- full-text search on titles
@@ -104,9 +105,15 @@ CREATE TABLE Recommends (
   game_id      INT NOT NULL,
   method       ENUM('content','collaborative','trending','hybrid') NOT NULL DEFAULT 'hybrid',
   score        DECIMAL(5,4) NOT NULL,
+  content_score DECIMAL(5,4) NOT NULL DEFAULT 0,
+  collab_score DECIMAL(5,4) NOT NULL DEFAULT 0,
+  trending_score DECIMAL(5,4) NOT NULL DEFAULT 0,
   generated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (user_id, game_id),
   CONSTRAINT chk_rec_score CHECK (score BETWEEN 0 AND 1),
+  CONSTRAINT chk_rec_content CHECK (content_score BETWEEN 0 AND 1),
+  CONSTRAINT chk_rec_collab CHECK (collab_score BETWEEN 0 AND 1),
+  CONSTRAINT chk_rec_trending CHECK (trending_score BETWEEN 0 AND 1),
   FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE,
   FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE CASCADE
 );

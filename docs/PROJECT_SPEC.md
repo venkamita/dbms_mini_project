@@ -131,6 +131,7 @@ OnPlatform(game_id → Game, platform_id → Platform)                  PK(game_
 | base_price | DECIMAL(8,2) | NOT NULL, CHECK ≥ 0 |
 | avg_rating | DECIMAL(3,2) | NOT NULL, CHECK 0–5, maintained by triggers |
 | release_date | DATE | indexed |
+| is_active | BOOLEAN | NOT NULL, default TRUE; soft deletion |
 
 **Genre** / **Platform**
 | Attribute | Type | Constraints |
@@ -166,6 +167,9 @@ OnPlatform(game_id → Game, platform_id → Platform)                  PK(game_
 | user_id, game_id | INT | composite PK, FKs (cascade) |
 | method | ENUM('content','collaborative','trending','hybrid') | NOT NULL |
 | score | DECIMAL(5,4) | NOT NULL, CHECK 0–1 |
+| content_score | DECIMAL(5,4) | NOT NULL, default 0, CHECK 0–1 |
+| collab_score | DECIMAL(5,4) | NOT NULL, default 0, CHECK 0–1 |
+| trending_score | DECIMAL(5,4) | NOT NULL, default 0, CHECK 0–1 |
 | generated_at | TIMESTAMP | default now |
 
 **HasGenre** / **OnPlatform**

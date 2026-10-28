@@ -1,0 +1,9 @@
+{
+  "name": "gamematch",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "seed:passwords": "node --env-file=.env.local scripts/set-seed-passwords.mjs"
+  }
+}

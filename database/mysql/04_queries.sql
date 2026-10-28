@@ -6,8 +6,8 @@ USE gamematch;
 
 -- ---------- DDL: ALTER and DROP ----------
 
--- ALTER: soft-delete flag so admins can hide a game without losing its ratings
-ALTER TABLE Game ADD COLUMN is_active BOOLEAN NOT NULL DEFAULT TRUE;
+-- ALTER: optional timestamp to record the user's most recent login
+ALTER TABLE User ADD COLUMN last_login TIMESTAMP NULL;
 
 -- ALTER: widen a column
 ALTER TABLE Game MODIFY COLUMN publisher VARCHAR(150);
