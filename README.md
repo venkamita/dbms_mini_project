@@ -1,6 +1,6 @@
 # GameMatch — Explainable Game Recommendation Platform
 
-DBMS Level 3 Project · Section H · Team 15 — Sharat Doddihal (PES1UG24CS430), Shashank Palcharla (PES1UG24CS436).
+DBMS Level 3 Project · Section H · Team 15 — Sharat Doddihal (PES1UG24CS430), Shashannk Palcharla (PES1UG24CS436).
 
 Browse games, write reviews, save a wishlist, buy into a mock library, and see why each game is recommended. Admins manage games and analytics. The score combines **30% content** (MySQL function), **50% collaborative** (MySQL procedure), and **20% trending** (MongoDB aggregation). Triggers maintain ratings; the purchase procedure updates library and wishlist atomically. No real payments are involved.
 
