@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3200" height="3650" viewBox="0 0 3200 3650" role="img"><title>GameMatch — Entity–Relationship Diagram</title><desc>Final base-schema model in Chen notation, including stored relationship attributes.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#172b4d"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<g fill="#172b4d" font-family="Arial, Helvetica, sans-serif">
+<text x="1600" y="65" text-anchor="middle" dominant-baseline="middle" font-size="43" font-weight="700">GameMatch — ER Diagram</text>
+<text x="1600" y="115" text-anchor="middle" dominant-baseline="middle" font-size="24">DBMS Level 3 Project · Section H · Team 15</text>
+<polyline points="550,650 220,250" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="550,650 880,250" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="550,650 220,420" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="550,650 220,590" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="550,650 880,420" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="550,650 880,590" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<ellipse cx="220" cy="250" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="220" y="250" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">user_id</text>
+<ellipse cx="880" cy="250" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="880" y="250" text-anchor="middle" dominant-baseline="middle" font-size="25">username</text>
+<ellipse cx="220" cy="420" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="220" y="420" text-anchor="middle" dominant-baseline="middle" font-size="25">email</text>
+<ellipse cx="220" cy="590" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="220" y="590" text-anchor="middle" dominant-baseline="middle" font-size="25">password_hash</text>
+<ellipse cx="880" cy="420" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="880" y="420" text-anchor="middle" dominant-baseline="middle" font-size="25">role</text>
+<ellipse cx="880" cy="590" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="880" y="590" text-anchor="middle" dominant-baseline="middle" font-size="25">created_at</text>
+<rect x="420" y="610" width="260" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="550" y="650" text-anchor="middle" dominant-baseline="middle" font-size="33" font-weight="700">User</text>
+<polyline points="2650,650 2320,250" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="2650,650 2650,250" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="2650,650 2320,420" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="2650,650 2320,590" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="2650,650 2980,590" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="2650,650 2980,250" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="2650,650 2980,420" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<ellipse cx="2320" cy="250" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="2320" y="250" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">game_id</text>
+<ellipse cx="2650" cy="250" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="2650" y="250" text-anchor="middle" dominant-baseline="middle" font-size="25">title</text>
+<ellipse cx="2320" cy="420" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="2320" y="420" text-anchor="middle" dominant-baseline="middle" font-size="25">publisher</text>
+<ellipse cx="2320" cy="590" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="2320" y="590" text-anchor="middle" dominant-baseline="middle" font-size="25">base_price</text>
+<ellipse cx="2980" cy="590" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="2980" y="590" text-anchor="middle" dominant-baseline="middle" font-size="25">avg_rating</text>
+<ellipse cx="2980" cy="250" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="2980" y="250" text-anchor="middle" dominant-baseline="middle" font-size="25">release_date</text>
+<ellipse cx="2980" cy="420" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="2980" y="420" text-anchor="middle" dominant-baseline="middle" font-size="25">is_active</text>
+<rect x="2520" y="610" width="260" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2650" y="650" text-anchor="middle" dominant-baseline="middle" font-size="33" font-weight="700">Game</text>
+<polyline points="550,690 550,2200" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="2650,690 2650,3050" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="550,1000 1420,1000" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1780,1000 2650,1000" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<text x="675" y="975" text-anchor="middle" dominant-baseline="middle" font-size="23">M (0..*)</text>
+<text x="2520" y="975" text-anchor="middle" dominant-baseline="middle" font-size="23">N (0..*)</text>
+<polyline points="1600,1000 1270,850" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1600,1000 1600,850" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1600,1000 1930,850" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<ellipse cx="1270" cy="850" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="1270" y="850" text-anchor="middle" dominant-baseline="middle" font-size="25">score</text>
+<ellipse cx="1600" cy="850" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="1600" y="850" text-anchor="middle" dominant-baseline="middle" font-size="25">review_text</text>
+<ellipse cx="1930" cy="850" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="1930" y="850" text-anchor="middle" dominant-baseline="middle" font-size="25">rated_at</text>
+<polygon points="1600,935 1780,1000 1600,1065 1420,1000" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1600" y="1000" text-anchor="middle" dominant-baseline="middle" font-size="29">Rates</text>
+<polyline points="550,1350 1420,1350" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1780,1350 2650,1350" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<text x="675" y="1325" text-anchor="middle" dominant-baseline="middle" font-size="23">M (0..*)</text>
+<text x="2520" y="1325" text-anchor="middle" dominant-baseline="middle" font-size="23">N (0..*)</text>
+<polyline points="1600,1350 1600,1200" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<ellipse cx="1600" cy="1200" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="1600" y="1200" text-anchor="middle" dominant-baseline="middle" font-size="25">added_at</text>
+<polygon points="1600,1285 1780,1350 1600,1415 1420,1350" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1600" y="1350" text-anchor="middle" dominant-baseline="middle" font-size="29">Adds</text>
+<polyline points="550,1700 1420,1700" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1780,1700 2650,1700" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<text x="675" y="1675" text-anchor="middle" dominant-baseline="middle" font-size="23">M (0..*)</text>
+<text x="2520" y="1675" text-anchor="middle" dominant-baseline="middle" font-size="23">N (0..*)</text>
+<polyline points="1600,1700 1435,1550" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1600,1700 1765,1550" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<ellipse cx="1435" cy="1550" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="1435" y="1550" text-anchor="middle" dominant-baseline="middle" font-size="25">price_paid</text>
+<ellipse cx="1765" cy="1550" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="1765" y="1550" text-anchor="middle" dominant-baseline="middle" font-size="25">purchased_at</text>
+<polygon points="1600,1635 1780,1700 1600,1765 1420,1700" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1600" y="1700" text-anchor="middle" dominant-baseline="middle" font-size="29">Owns</text>
+<polyline points="550,2200 1420,2200" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1780,2200 2650,2200" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<text x="675" y="2175" text-anchor="middle" dominant-baseline="middle" font-size="23">M (0..*)</text>
+<text x="2520" y="2175" text-anchor="middle" dominant-baseline="middle" font-size="23">N (0..*)</text>
+<polyline points="1600,2200 1100,2000" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1600,2200 1430,2000" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1600,2200 1760,2000" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1600,2200 2090,2000" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1600,2200 1435,2400" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1600,2200 1765,2400" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<ellipse cx="1100" cy="2000" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="1100" y="2000" text-anchor="middle" dominant-baseline="middle" font-size="25">method</text>
+<ellipse cx="1430" cy="2000" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="1430" y="2000" text-anchor="middle" dominant-baseline="middle" font-size="25">score</text>
+<ellipse cx="1760" cy="2000" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="1760" y="2000" text-anchor="middle" dominant-baseline="middle" font-size="25">content_score</text>
+<ellipse cx="2090" cy="2000" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="2090" y="2000" text-anchor="middle" dominant-baseline="middle" font-size="25">collab_score</text>
+<ellipse cx="1435" cy="2400" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="1435" y="2400" text-anchor="middle" dominant-baseline="middle" font-size="25">trending_score</text>
+<ellipse cx="1765" cy="2400" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="1765" y="2400" text-anchor="middle" dominant-baseline="middle" font-size="25">generated_at</text>
+<polygon points="1600,2135 1780,2200 1600,2265 1420,2200" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1600" y="2200" text-anchor="middle" dominant-baseline="middle" font-size="29">Recommends</text>
+<polyline points="550,2700 220,2590" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="550,2700 550,2510" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<ellipse cx="220" cy="2590" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="220" y="2590" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">genre_id</text>
+<ellipse cx="550" cy="2510" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="550" y="2510" text-anchor="middle" dominant-baseline="middle" font-size="25">name</text>
+<rect x="420" y="2660" width="260" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="550" y="2700" text-anchor="middle" dominant-baseline="middle" font-size="33" font-weight="700">Genre</text>
+<polygon points="1600,2635 1780,2700 1600,2765 1420,2700" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1600" y="2700" text-anchor="middle" dominant-baseline="middle" font-size="29">HasGenre</text>
+<polyline points="680,2700 1420,2700" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1780,2700 2650,2700" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<text x="810" y="2675" text-anchor="middle" dominant-baseline="middle" font-size="23">M (0..*)</text>
+<text x="2520" y="2675" text-anchor="middle" dominant-baseline="middle" font-size="23">N (0..*)</text>
+<polyline points="550,3050 220,2940" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="550,3050 550,2860" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<ellipse cx="220" cy="2940" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="220" y="2940" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">platform_id</text>
+<ellipse cx="550" cy="2860" rx="140" ry="37" fill="white" stroke="#172b4d" stroke-width="2.5"/>
+<text x="550" y="2860" text-anchor="middle" dominant-baseline="middle" font-size="25">name</text>
+<rect x="420" y="3010" width="260" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="550" y="3050" text-anchor="middle" dominant-baseline="middle" font-size="33" font-weight="700">Platform</text>
+<polygon points="1600,2985 1780,3050 1600,3115 1420,3050" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1600" y="3050" text-anchor="middle" dominant-baseline="middle" font-size="29">OnPlatform</text>
+<polyline points="680,3050 1420,3050" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1780,3050 2650,3050" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<text x="810" y="3025" text-anchor="middle" dominant-baseline="middle" font-size="23">M (0..*)</text>
+<text x="2520" y="3025" text-anchor="middle" dominant-baseline="middle" font-size="23">N (0..*)</text>
+<rect x="170" y="3220" width="2860" height="360" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="220" y="3270" text-anchor="start" dominant-baseline="middle" font-size="27" font-weight="700">NOTATION AND IMPLEMENTATION NOTES</text>
+<text x="220" y="3320" text-anchor="start" dominant-baseline="middle" font-size="23">Rectangle = entity · Oval = attribute · Diamond = relationship · Underline = entity primary key.</text>
+<text x="220" y="3357" text-anchor="start" dominant-baseline="middle" font-size="23">M:N relationships have optional participation (0..*) at both entity ends; trunks only route connectors.</text>
+<text x="220" y="3394" text-anchor="start" dominant-baseline="middle" font-size="23">Each relationship occurrence identifies exactly one existing entity on each side; SQL junction keys enforce uniqueness.</text>
+<text x="220" y="3431" text-anchor="start" dominant-baseline="middle" font-size="23">Username / email and Genre.name / Platform.name are UNIQUE, not the selected entity primary keys.</text>
+<text x="220" y="3468" text-anchor="start" dominant-baseline="middle" font-size="23">No mongo_metadata_id exists in Game. MongoDB links use shared IDs, not cross-database SQL foreign keys.</text>
+<text x="220" y="3505" text-anchor="start" dominant-baseline="middle" font-size="23">All base-schema timestamps are shown. See DATABASE_MODEL.md for SQL constraints and the separate MongoDB model.</text>
+<text x="220" y="3542" text-anchor="start" dominant-baseline="middle" font-size="23">Game.avg_rating is a stored derived value maintained by the insert, update and delete triggers on Rates.</text></g></svg>

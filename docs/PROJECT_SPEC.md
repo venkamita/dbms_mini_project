@@ -79,36 +79,40 @@ flowchart LR
 
 ## 7. ER Diagram and Relational Schema
 
-Hand-drawn diagrams: [`er-diagram.png`](er-diagram.png), [`relational-schema.png`](relational-schema.png).
+Final digital diagrams: [ER PNG](er-diagram.png) ([editable SVG](er-diagram.svg)) and [relational schema PNG](relational-schema.png) ([editable SVG](relational-schema.svg)). They retain the original Chen ER and boxed-row relational notation. The handwritten originals are preserved in [originals/](originals/).
+
+The complete [database model reference](DATABASE_MODEL.md) specifies all keys, participation rules, constraints, defaults, indexes, and the separate MongoDB document model. The drawings describe `01_schema.sql`: 10 tables, 41 columns and 12 foreign-key constraints.
 
 **Entities:** USER, GAME, GENRE, PLATFORM
 **Relationships (all M:N):**
 
 | Relationship | Between | Attributes | Table |
 |---|---|---|---|
-| Rates | User – Game | score, review_text | `Rates` |
-| Adds | User – Game | — | `Adds` (wishlist) |
-| Owns | User – Game | price_paid | `Owns` (library) |
-| Recommends | User – Game | method, score | `Recommends` |
+| Rates | User – Game | score, review_text, rated_at | `Rates` |
+| Adds | User – Game | added_at | `Adds` (wishlist) |
+| Owns | User – Game | price_paid, purchased_at | `Owns` (library) |
+| Recommends | User – Game | method, score, content_score, collab_score, trending_score, generated_at | `Recommends` |
 | has_genre | Game – Genre | — | `HasGenre` |
 | on_platform | Game – Platform | — | `OnPlatform` |
 
 **Relational schema** (PK underlined in the drawing, FK →):
 
 ```
-User(user_id, username, email, password_hash, role)
+User(user_id, username, email, password_hash, role, created_at)
 Game(game_id, title, publisher, base_price, avg_rating, release_date, is_active)
 Genre(genre_id, name)
 Platform(platform_id, name)
-Rates(user_id → User, game_id → Game, score, review_text)          PK(user_id, game_id)
-Adds(user_id → User, game_id → Game)                                PK(user_id, game_id)
-Owns(user_id → User, game_id → Game, price_paid)                    PK(user_id, game_id)
-Recommends(user_id → User, game_id → Game, method, score, content_score, collab_score, trending_score) PK(user_id, game_id)
+Rates(user_id → User, game_id → Game, score, review_text, rated_at) PK(user_id, game_id)
+Adds(user_id → User, game_id → Game, added_at)                      PK(user_id, game_id)
+Owns(user_id → User, game_id → Game, price_paid, purchased_at)      PK(user_id, game_id)
+Recommends(user_id → User, game_id → Game, method, score, content_score, collab_score, trending_score, generated_at) PK(user_id, game_id)
 HasGenre(game_id → Game, genre_id → Genre)                          PK(game_id, genre_id)
 OnPlatform(game_id → Game, platform_id → Platform)                  PK(game_id, platform_id)
 ```
 
-> **One change to the drawings:** remove `mongo_metadata_id` from GAME in both the ER diagram and the relational schema. MongoDB documents already store `game_id`, so a second link from the MySQL side would be a duplicate that can go out of sync. Timestamp columns (`created_at`, `rated_at`, …) exist in the SQL but don't need to be drawn.
+All six relationships permit zero or many occurrences at either entity end. Every junction row references exactly one existing parent on each side through NOT NULL foreign keys, all with ON DELETE CASCADE. Both underlined ID columns form each junction table's composite PK; username/email and taxonomy names are separate UNIQUE keys. Game.avg_rating is stored and maintained by Rates triggers.
+
+There is no `mongo_metadata_id` in Game. MongoDB documents carry the SQL `game_id` (and activity documents also carry `user_id`); these are application-maintained associations, not cross-database SQL foreign keys. All base timestamps are included. Optional `last_login` and the publisher-width change in `04_queries.sql` are excluded from the base-schema drawings.
 
 ## 8. Data Dictionary
 
@@ -374,7 +378,7 @@ Run `npm run test:integration -- --confirm-demo-db` later against disposable fre
 
 ## 17. Documentation / Demo Checklist
 - [ ] Objectives, functional requirements (§2, §4)
-- [ ] ER diagram, relational schema (§7, updated drawings)
+- [x] ER diagram, relational schema (§7, final digital drawings matched to base DDL)
 - [ ] Database choice and justification (§5)
 - [ ] Data dictionary (§8)
 - [ ] SQL / NoSQL implementation, important queries (§9, §10, `04_queries.sql`)

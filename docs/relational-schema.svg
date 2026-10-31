@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3600" height="2540" viewBox="0 0 3600 2540" role="img"><title>GameMatch — Relational Schema</title><desc>All ten SQL tables, exact columns, composite primary keys, and twelve foreign-key mappings.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#172b4d"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<g fill="#172b4d" font-family="Arial, Helvetica, sans-serif">
+<text x="1800" y="65" text-anchor="middle" dominant-baseline="middle" font-size="43" font-weight="700">GameMatch — Relational Schema</text>
+<text x="1800" y="115" text-anchor="middle" dominant-baseline="middle" font-size="24">Base schema: database/mysql/01_schema.sql · Underlined columns collectively form each table’s PK</text>
+<polyline points="70,1395 70,185 262.5,185 262.5,260" fill="none" stroke="#172b4d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<polyline points="3530,1920 3530,185 1962.5,185 1962.5,260" fill="none" stroke="#172b4d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<polyline points="1150,620 1150,565 70,565" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1450,620 1450,525 3530,525" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1150,870 1150,815 70,815" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1450,870 1450,775 3530,775" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1150,1120 1150,1065 70,1065" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1450,1120 1450,1025 3530,1025" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="820,1450 820,1395 70,1395" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1100,1450 1100,1355 3530,1355" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1075,2070 1075,1920 3530,1920" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="1385,2070 1385,2005 405,2005 405,1900" fill="none" stroke="#172b4d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<polyline points="2225,2070 2225,1770 3530,1770" fill="none" stroke="#172b4d" stroke-width="2.5"/>
+<polyline points="2535,2070 2535,2005 2715,2005 2715,1900" fill="none" stroke="#172b4d" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="140" y="235" text-anchor="start" dominant-baseline="middle" font-size="31" font-weight="700">User</text>
+<rect x="140" y="260" width="245" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="262.5" y="286" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">user_id</text>
+<text x="262.5" y="319" text-anchor="middle" dominant-baseline="middle" font-size="18">PK</text>
+<rect x="385" y="260" width="245" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="507.5" y="286" text-anchor="middle" dominant-baseline="middle" font-size="25">username</text>
+<text x="507.5" y="319" text-anchor="middle" dominant-baseline="middle" font-size="18">UQ</text>
+<rect x="630" y="260" width="245" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="752.5" y="286" text-anchor="middle" dominant-baseline="middle" font-size="25">email</text>
+<text x="752.5" y="319" text-anchor="middle" dominant-baseline="middle" font-size="18">UQ</text>
+<rect x="875" y="260" width="245" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="997.5" y="286" text-anchor="middle" dominant-baseline="middle" font-size="25">password_hash</text>
+<text x="997.5" y="319" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="1120" y="260" width="245" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1242.5" y="286" text-anchor="middle" dominant-baseline="middle" font-size="25">role</text>
+<text x="1242.5" y="319" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="1365" y="260" width="245" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1487.5" y="286" text-anchor="middle" dominant-baseline="middle" font-size="25">created_at</text>
+<text x="1487.5" y="319" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<text x="1850" y="235" text-anchor="start" dominant-baseline="middle" font-size="31" font-weight="700">Game</text>
+<rect x="1850" y="260" width="225" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1962.5" y="286" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">game_id</text>
+<text x="1962.5" y="319" text-anchor="middle" dominant-baseline="middle" font-size="18">PK</text>
+<rect x="2075" y="260" width="225" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2187.5" y="286" text-anchor="middle" dominant-baseline="middle" font-size="25">title</text>
+<text x="2187.5" y="319" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="2300" y="260" width="225" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2412.5" y="286" text-anchor="middle" dominant-baseline="middle" font-size="25">publisher</text>
+<text x="2412.5" y="319" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="2525" y="260" width="225" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2637.5" y="286" text-anchor="middle" dominant-baseline="middle" font-size="25">base_price</text>
+<text x="2637.5" y="319" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="2750" y="260" width="225" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2862.5" y="286" text-anchor="middle" dominant-baseline="middle" font-size="25">avg_rating</text>
+<text x="2862.5" y="319" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="2975" y="260" width="225" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="3087.5" y="286" text-anchor="middle" dominant-baseline="middle" font-size="25">release_date</text>
+<text x="3087.5" y="319" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="3200" y="260" width="225" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="3312.5" y="286" text-anchor="middle" dominant-baseline="middle" font-size="25">is_active</text>
+<text x="3312.5" y="319" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<text x="1000" y="595" text-anchor="start" dominant-baseline="middle" font-size="31" font-weight="700">Rates</text>
+<rect x="1000" y="620" width="300" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1150" y="646" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">user_id</text>
+<text x="1150" y="679" text-anchor="middle" dominant-baseline="middle" font-size="18">PK + FK</text>
+<rect x="1300" y="620" width="300" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1450" y="646" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">game_id</text>
+<text x="1450" y="679" text-anchor="middle" dominant-baseline="middle" font-size="18">PK + FK</text>
+<rect x="1600" y="620" width="300" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1750" y="646" text-anchor="middle" dominant-baseline="middle" font-size="25">score</text>
+<text x="1750" y="679" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="1900" y="620" width="300" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2050" y="646" text-anchor="middle" dominant-baseline="middle" font-size="25">review_text</text>
+<text x="2050" y="679" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="2200" y="620" width="300" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2350" y="646" text-anchor="middle" dominant-baseline="middle" font-size="25">rated_at</text>
+<text x="2350" y="679" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<text x="1000" y="732" text-anchor="start" dominant-baseline="middle" font-size="22">user_id → User.user_id  |  game_id → Game.game_id</text>
+<text x="1000" y="765" text-anchor="start" dominant-baseline="middle" font-size="20">Both FKs: NOT NULL · ON DELETE CASCADE</text>
+<text x="1000" y="845" text-anchor="start" dominant-baseline="middle" font-size="31" font-weight="700">Adds</text>
+<rect x="1000" y="870" width="300" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1150" y="896" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">user_id</text>
+<text x="1150" y="929" text-anchor="middle" dominant-baseline="middle" font-size="18">PK + FK</text>
+<rect x="1300" y="870" width="300" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1450" y="896" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">game_id</text>
+<text x="1450" y="929" text-anchor="middle" dominant-baseline="middle" font-size="18">PK + FK</text>
+<rect x="1600" y="870" width="300" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1750" y="896" text-anchor="middle" dominant-baseline="middle" font-size="25">added_at</text>
+<text x="1750" y="929" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<text x="1000" y="982" text-anchor="start" dominant-baseline="middle" font-size="22">user_id → User.user_id  |  game_id → Game.game_id</text>
+<text x="1000" y="1015" text-anchor="start" dominant-baseline="middle" font-size="20">Both FKs: NOT NULL · ON DELETE CASCADE</text>
+<text x="1000" y="1095" text-anchor="start" dominant-baseline="middle" font-size="31" font-weight="700">Owns</text>
+<rect x="1000" y="1120" width="300" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1150" y="1146" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">user_id</text>
+<text x="1150" y="1179" text-anchor="middle" dominant-baseline="middle" font-size="18">PK + FK</text>
+<rect x="1300" y="1120" width="300" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1450" y="1146" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">game_id</text>
+<text x="1450" y="1179" text-anchor="middle" dominant-baseline="middle" font-size="18">PK + FK</text>
+<rect x="1600" y="1120" width="300" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1750" y="1146" text-anchor="middle" dominant-baseline="middle" font-size="25">price_paid</text>
+<text x="1750" y="1179" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="1900" y="1120" width="300" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2050" y="1146" text-anchor="middle" dominant-baseline="middle" font-size="25">purchased_at</text>
+<text x="2050" y="1179" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<text x="1000" y="1232" text-anchor="start" dominant-baseline="middle" font-size="22">user_id → User.user_id  |  game_id → Game.game_id</text>
+<text x="1000" y="1265" text-anchor="start" dominant-baseline="middle" font-size="20">Both FKs: NOT NULL · ON DELETE CASCADE</text>
+<text x="680" y="1315" text-anchor="start" dominant-baseline="middle" font-size="31" font-weight="700">Recommends</text>
+<rect x="680" y="1450" width="280" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="820" y="1476" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">user_id</text>
+<text x="820" y="1509" text-anchor="middle" dominant-baseline="middle" font-size="18">PK + FK</text>
+<rect x="960" y="1450" width="280" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1100" y="1476" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">game_id</text>
+<text x="1100" y="1509" text-anchor="middle" dominant-baseline="middle" font-size="18">PK + FK</text>
+<rect x="1240" y="1450" width="280" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1380" y="1476" text-anchor="middle" dominant-baseline="middle" font-size="25">method</text>
+<text x="1380" y="1509" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="1520" y="1450" width="280" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1660" y="1476" text-anchor="middle" dominant-baseline="middle" font-size="25">score</text>
+<text x="1660" y="1509" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="1800" y="1450" width="280" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1940" y="1476" text-anchor="middle" dominant-baseline="middle" font-size="25">content_score</text>
+<text x="1940" y="1509" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="2080" y="1450" width="280" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2220" y="1476" text-anchor="middle" dominant-baseline="middle" font-size="25">collab_score</text>
+<text x="2220" y="1509" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="2360" y="1450" width="280" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2500" y="1476" text-anchor="middle" dominant-baseline="middle" font-size="25">trending_score</text>
+<text x="2500" y="1509" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<rect x="2640" y="1450" width="280" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2780" y="1476" text-anchor="middle" dominant-baseline="middle" font-size="25">generated_at</text>
+<text x="2780" y="1509" text-anchor="middle" dominant-baseline="middle" font-size="18">attribute</text>
+<text x="680" y="1562" text-anchor="start" dominant-baseline="middle" font-size="22">user_id → User.user_id  |  game_id → Game.game_id</text>
+<text x="680" y="1595" text-anchor="start" dominant-baseline="middle" font-size="20">Both FKs: NOT NULL · ON DELETE CASCADE</text>
+<text x="250" y="1795" text-anchor="start" dominant-baseline="middle" font-size="31" font-weight="700">Genre</text>
+<rect x="250" y="1820" width="310" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="405" y="1846" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">genre_id</text>
+<text x="405" y="1879" text-anchor="middle" dominant-baseline="middle" font-size="18">PK</text>
+<rect x="560" y="1820" width="310" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="715" y="1846" text-anchor="middle" dominant-baseline="middle" font-size="25">name</text>
+<text x="715" y="1879" text-anchor="middle" dominant-baseline="middle" font-size="18">UQ</text>
+<text x="2560" y="1795" text-anchor="start" dominant-baseline="middle" font-size="31" font-weight="700">Platform</text>
+<rect x="2560" y="1820" width="310" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2715" y="1846" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">platform_id</text>
+<text x="2715" y="1879" text-anchor="middle" dominant-baseline="middle" font-size="18">PK</text>
+<rect x="2870" y="1820" width="310" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="3025" y="1846" text-anchor="middle" dominant-baseline="middle" font-size="25">name</text>
+<text x="3025" y="1879" text-anchor="middle" dominant-baseline="middle" font-size="18">UQ</text>
+<text x="920" y="2045" text-anchor="start" dominant-baseline="middle" font-size="31" font-weight="700">HasGenre</text>
+<rect x="920" y="2070" width="310" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1075" y="2096" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">game_id</text>
+<text x="1075" y="2129" text-anchor="middle" dominant-baseline="middle" font-size="18">PK + FK</text>
+<rect x="1230" y="2070" width="310" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="1385" y="2096" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">genre_id</text>
+<text x="1385" y="2129" text-anchor="middle" dominant-baseline="middle" font-size="18">PK + FK</text>
+<text x="920" y="2182" text-anchor="start" dominant-baseline="middle" font-size="22">game_id → Game.game_id  |  genre_id → Genre.genre_id</text>
+<text x="920" y="2215" text-anchor="start" dominant-baseline="middle" font-size="20">Both FKs: NOT NULL · ON DELETE CASCADE</text>
+<text x="2070" y="2045" text-anchor="start" dominant-baseline="middle" font-size="31" font-weight="700">OnPlatform</text>
+<rect x="2070" y="2070" width="310" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2225" y="2096" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">game_id</text>
+<text x="2225" y="2129" text-anchor="middle" dominant-baseline="middle" font-size="18">PK + FK</text>
+<rect x="2380" y="2070" width="310" height="80" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="2535" y="2096" text-anchor="middle" dominant-baseline="middle" font-size="25" text-decoration="underline">platform_id</text>
+<text x="2535" y="2129" text-anchor="middle" dominant-baseline="middle" font-size="18">PK + FK</text>
+<text x="2070" y="2182" text-anchor="start" dominant-baseline="middle" font-size="22">game_id → Game.game_id  |  platform_id → Platform.platform_id</text>
+<text x="2070" y="2215" text-anchor="start" dominant-baseline="middle" font-size="20">Both FKs: NOT NULL · ON DELETE CASCADE</text>
+<text x="140" y="410" text-anchor="start" dominant-baseline="middle" font-size="22">UQ = UNIQUE. Username and email are separate unique keys.</text>
+<text x="1850" y="410" text-anchor="start" dominant-baseline="middle" font-size="22">avg_rating is stored and maintained by triggers.</text>
+<rect x="140" y="2300" width="3320" height="170" fill="white" stroke="#172b4d" stroke-width="3"/>
+<text x="180" y="2335" text-anchor="start" dominant-baseline="middle" font-size="23">Each junction-table PK is the combination of BOTH underlined ID columns; neither ID alone is unique.</text>
+<text x="180" y="2370" text-anchor="start" dominant-baseline="middle" font-size="23">Every junction row has exactly one parent on each side; a parent may have zero or many junction rows.</text>
+<text x="180" y="2405" text-anchor="start" dominant-baseline="middle" font-size="23">All 12 FK mappings are stated beneath their tables. Arrows point to parent PKs; shared outside rails bundle references.</text>
+<text x="180" y="2440" text-anchor="start" dominant-baseline="middle" font-size="23">Constraints / defaults / indexes / MongoDB associations: DATABASE_MODEL.md. Optional last_login ALTER demo is excluded.</text></g></svg>

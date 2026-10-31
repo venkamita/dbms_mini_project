@@ -6,6 +6,8 @@ Browse games, write reviews, save a wishlist, buy into a mock library, and see w
 
 Full design and test status: [PROJECT_SPEC.md](docs/PROJECT_SPEC.md).
 
+Final database drawings: [ER diagram](docs/er-diagram.png) ([editable SVG](docs/er-diagram.svg)) and [relational schema](docs/relational-schema.png) ([editable SVG](docs/relational-schema.svg)). See [DATABASE_MODEL.md](docs/DATABASE_MODEL.md) for constraints, key/participation notation, MongoDB associations, preserved originals and regeneration instructions.
+
 ## Prerequisites
 
 - Node.js **20.19+** and npm (MongoDB driver 7 requires 20.19+; Node 22 LTS works).

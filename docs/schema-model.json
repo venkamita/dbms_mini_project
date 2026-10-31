@@ -1,0 +1,412 @@
+{
+  "User": {
+    "columns": [
+      {
+        "name": "user_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": true
+      },
+      {
+        "name": "username",
+        "type": "VARCHAR",
+        "unique": true,
+        "inlinePK": false
+      },
+      {
+        "name": "email",
+        "type": "VARCHAR",
+        "unique": true,
+        "inlinePK": false
+      },
+      {
+        "name": "password_hash",
+        "type": "VARCHAR",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "role",
+        "type": "ENUM",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP",
+        "unique": false,
+        "inlinePK": false
+      }
+    ],
+    "pk": [
+      "user_id"
+    ],
+    "fks": []
+  },
+  "Game": {
+    "columns": [
+      {
+        "name": "game_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": true
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "publisher",
+        "type": "VARCHAR",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "base_price",
+        "type": "DECIMAL",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "avg_rating",
+        "type": "DECIMAL",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "release_date",
+        "type": "DATE",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "is_active",
+        "type": "BOOLEAN",
+        "unique": false,
+        "inlinePK": false
+      }
+    ],
+    "pk": [
+      "game_id"
+    ],
+    "fks": []
+  },
+  "Genre": {
+    "columns": [
+      {
+        "name": "genre_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": true
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR",
+        "unique": true,
+        "inlinePK": false
+      }
+    ],
+    "pk": [
+      "genre_id"
+    ],
+    "fks": []
+  },
+  "Platform": {
+    "columns": [
+      {
+        "name": "platform_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": true
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR",
+        "unique": true,
+        "inlinePK": false
+      }
+    ],
+    "pk": [
+      "platform_id"
+    ],
+    "fks": []
+  },
+  "HasGenre": {
+    "columns": [
+      {
+        "name": "game_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "genre_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": false
+      }
+    ],
+    "pk": [
+      "game_id",
+      "genre_id"
+    ],
+    "fks": [
+      {
+        "column": "game_id",
+        "table": "Game",
+        "target": "game_id",
+        "onDelete": "CASCADE"
+      },
+      {
+        "column": "genre_id",
+        "table": "Genre",
+        "target": "genre_id",
+        "onDelete": "CASCADE"
+      }
+    ]
+  },
+  "OnPlatform": {
+    "columns": [
+      {
+        "name": "game_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "platform_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": false
+      }
+    ],
+    "pk": [
+      "game_id",
+      "platform_id"
+    ],
+    "fks": [
+      {
+        "column": "game_id",
+        "table": "Game",
+        "target": "game_id",
+        "onDelete": "CASCADE"
+      },
+      {
+        "column": "platform_id",
+        "table": "Platform",
+        "target": "platform_id",
+        "onDelete": "CASCADE"
+      }
+    ]
+  },
+  "Rates": {
+    "columns": [
+      {
+        "name": "user_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "game_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "score",
+        "type": "TINYINT",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "review_text",
+        "type": "TEXT",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "rated_at",
+        "type": "TIMESTAMP",
+        "unique": false,
+        "inlinePK": false
+      }
+    ],
+    "pk": [
+      "user_id",
+      "game_id"
+    ],
+    "fks": [
+      {
+        "column": "user_id",
+        "table": "User",
+        "target": "user_id",
+        "onDelete": "CASCADE"
+      },
+      {
+        "column": "game_id",
+        "table": "Game",
+        "target": "game_id",
+        "onDelete": "CASCADE"
+      }
+    ]
+  },
+  "Adds": {
+    "columns": [
+      {
+        "name": "user_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "game_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "added_at",
+        "type": "TIMESTAMP",
+        "unique": false,
+        "inlinePK": false
+      }
+    ],
+    "pk": [
+      "user_id",
+      "game_id"
+    ],
+    "fks": [
+      {
+        "column": "user_id",
+        "table": "User",
+        "target": "user_id",
+        "onDelete": "CASCADE"
+      },
+      {
+        "column": "game_id",
+        "table": "Game",
+        "target": "game_id",
+        "onDelete": "CASCADE"
+      }
+    ]
+  },
+  "Owns": {
+    "columns": [
+      {
+        "name": "user_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "game_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "price_paid",
+        "type": "DECIMAL",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "purchased_at",
+        "type": "TIMESTAMP",
+        "unique": false,
+        "inlinePK": false
+      }
+    ],
+    "pk": [
+      "user_id",
+      "game_id"
+    ],
+    "fks": [
+      {
+        "column": "user_id",
+        "table": "User",
+        "target": "user_id",
+        "onDelete": "CASCADE"
+      },
+      {
+        "column": "game_id",
+        "table": "Game",
+        "target": "game_id",
+        "onDelete": "CASCADE"
+      }
+    ]
+  },
+  "Recommends": {
+    "columns": [
+      {
+        "name": "user_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "game_id",
+        "type": "INT",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "method",
+        "type": "ENUM",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "score",
+        "type": "DECIMAL",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "content_score",
+        "type": "DECIMAL",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "collab_score",
+        "type": "DECIMAL",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "trending_score",
+        "type": "DECIMAL",
+        "unique": false,
+        "inlinePK": false
+      },
+      {
+        "name": "generated_at",
+        "type": "TIMESTAMP",
+        "unique": false,
+        "inlinePK": false
+      }
+    ],
+    "pk": [
+      "user_id",
+      "game_id"
+    ],
+    "fks": [
+      {
+        "column": "user_id",
+        "table": "User",
+        "target": "user_id",
+        "onDelete": "CASCADE"
+      },
+      {
+        "column": "game_id",
+        "table": "Game",
+        "target": "game_id",
+        "onDelete": "CASCADE"
+      }
+    ]
+  }
+}
