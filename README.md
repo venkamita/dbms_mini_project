@@ -45,10 +45,13 @@ All three variables (`MYSQL_URL`, `MONGODB_URI`, `JWT_SECRET`) are required. Mis
 
 ```bash
 npm run seed:passwords
+npm run seed:catalog
 npm run dev
 ```
 
 The password script loads `.env.local` with `node --env-file=.env.local`, hashes at bcrypt cost 10, and prints usernames only. It resets **every user's** password, so run it only on seed data.
+
+`seed:catalog` expands the initialized database to **64 games with real cover art and screenshots**, preserving existing users, ratings, wishlists and purchases. It can be rerun without duplicates. The shipped manifest/assets work offline; `npm run catalog:fetch` is only needed to refresh the external source snapshot. See [catalog data and attribution](docs/CATALOG_DATA.md). New games begin unrated; prices are USD snapshots and their PC availability comes from Steam.
 
 Open [GameMatch](http://localhost:3000). Production: `npm run build`, then `npm start`. Production authentication cookies require HTTPS; use `npm run dev` for a local HTTP demo.
 
@@ -56,7 +59,7 @@ Open [GameMatch](http://localhost:3000). Production: `npm run build`, then `npm 
 
 After setting seed passwords: **`u1_arjun`** (player) or **`admin`**, password **`password123`**. Other players: `u2_meera`, `u3_rohan`, `u4_kavya`.
 
-As admin, open Analytics and click **Recompute recommendations**. Then log in as `u1_arjun` and open For You. Fresh, untouched seed data should produce:
+As admin, open Analytics and click **Recompute recommendations**. Then log in as `u1_arjun` and open For You. The following exact example requires the untouched **four-game base seed, before `seed:catalog`**; the expanded catalog intentionally introduces additional candidates:
 
 | Game | Content | Collaborative | Trending | Hybrid |
 |---|---|---|---|---|
@@ -98,7 +101,7 @@ Client pages call APIs with `fetch`. Protected handlers verify the JWT and fetch
 | `/api/recommendations/recompute` | POST | Admin |
 | `/api/admin/analytics` | GET | Admin |
 
-`GET /api/games` accepts `genre`, `platform`, `maxPrice`, `q`. Text search preserves MongoDB relevance order while applying SQL filters. Otherwise results use average rating order. Inactive games are hidden from players; recommendations exclude rated and owned games.
+`GET /api/games` accepts `genre`, `platform`, `maxPrice`, `q`. Search places MySQL title matches first, then remaining MongoDB description/tag matches in relevance order, while applying SQL filters. Otherwise results use average rating order. Catalog and recommendation rows include a `cover_image` from metadata. Inactive games are hidden from players; recommendations exclude rated and owned games.
 
 Admin saves write SQL first and hold the transaction until MongoDB succeeds. Mongo failures roll SQL back; SQL commit failures trigger metadata compensation. This is application-level compensation, not a distributed transaction: simultaneous database outages can require manual reconciliation.
 

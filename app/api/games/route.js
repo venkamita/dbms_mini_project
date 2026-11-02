@@ -4,6 +4,7 @@ import { getDb } from '@/lib/mongo';
 import { getUser, requireAdmin } from '@/lib/auth';
 import { assert, id, route, body } from '@/lib/api';
 import { saveGame } from '@/lib/admin-games';
+import { attachGameMedia } from '@/lib/game-media';
 
 export const GET = route(async request => {
   const user = await getUser(request);
@@ -17,7 +18,10 @@ export const GET = route(async request => {
   let matches = null;
   if (q) {
     const db = await getDb();
-    matches = await db.collection('game_metadata').find({ $text: { $search: q } }, { projection: { _id: 0, game_id: 1, score: { $meta: 'textScore' } } }).sort({ score: { $meta: 'textScore' } }).toArray();
+    const [titleMatches] = await pool.execute("SELECT game_id FROM Game WHERE title LIKE ? ESCAPE '!' ORDER BY title", ['%' + q.replace(/[!%_]/g, '!$&') + '%']);
+    const textMatches = await db.collection('game_metadata').find({ $text: { $search: q } }, { projection: { _id: 0, game_id: 1, score: { $meta: 'textScore' } } }).sort({ score: { $meta: 'textScore' } }).toArray();
+    const seen = new Set(titleMatches.map(game => Number(game.game_id)));
+    matches = [...titleMatches, ...textMatches.filter(game => !seen.has(Number(game.game_id)))];
     if (!matches.length) return NextResponse.json([]);
   }
   const [rows] = await pool.execute(`SELECT g.* FROM Game g
@@ -33,7 +37,7 @@ export const GET = route(async request => {
     const order = new Map(matches.map((match, index) => [Number(match.game_id), index]));
     result.sort((a, b) => order.get(a.game_id) - order.get(b.game_id));
   }
-  return NextResponse.json(result);
+  return NextResponse.json(await attachGameMedia(result));
 });
 export const POST = route(async request => {
   await requireAdmin(request);

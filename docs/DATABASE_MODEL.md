@@ -101,11 +101,14 @@ game_id                BSON int, >= 1; required; unique index
 description            string, >= 10 characters; required
 tags                   array of strings; required
 screenshots            optional array of strings
+catalog_source         optional import provenance (Steam app ID, URL, retrieval date)
 system_requirements    optional object; nested keys vary by game/platform
 dlc                    optional array
 ```
 
 The collection has a `$jsonSchema` validator, a unique `{game_id: 1}` index, and a text index on description and tags. Detail retrieval uses `findOne({game_id})`; text search uses `$text` and sorts by `textScore`. Optional means optional at the database-validator level; the admin API requires the complete metadata shape. The validator only constrains DLC as an array; the API additionally validates each DLC name and price.
+
+The expanded catalog uses the first `screenshots` URL as cover art and subsequent URLs as the gameplay gallery. Images are local WebP assets. `catalog_source` is additional application metadata permitted by the validator, not a new required property or SQL column; its stable Steam app ID makes imports repeatable. See [CATALOG_DATA.md](CATALOG_DATA.md) for source attribution and import behavior.
 
 ### activity_log
 

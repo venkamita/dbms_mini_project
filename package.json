@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "test": "node --test tests/*.test.mjs",
     "test:integration": "node --env-file=.env.local scripts/test-integration.mjs",
-    "seed:passwords": "node --env-file=.env.local scripts/set-seed-passwords.mjs"
+    "seed:passwords": "node --env-file=.env.local scripts/set-seed-passwords.mjs",
+    "catalog:fetch": "node scripts/fetch-catalog.mjs",
+    "seed:catalog": "node --env-file=.env.local scripts/seed-catalog.mjs"
   },
   "engines": {
     "node": ">=20.19.0"
