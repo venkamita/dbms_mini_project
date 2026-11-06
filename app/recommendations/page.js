@@ -7,6 +7,28 @@ export default function Recommendations() {
   const [games, setGames] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  useEffect(() => { let active = true; api('/api/recommendations').then(result => { if (active) setGames(result); }).catch(err => { if (active) setError(err.message); }).finally(() => { if (active) setLoading(false); }); return () => { active = false; }; }, []);
-  return <><Intro label="Picked for you" title="Good games. Clear reasons.">Discover what’s next, with a recommendation you can understand.</Intro><section className="panel"><h2>How your match is made</h2><p className="muted">30% content + 50% similar players + 20% weekly trending. The bar shows each signal’s contribution to your total match score.</p><div className="row text-sm">{signals.map(signal => <span key={signal.key}><span className={`dot ${signal.className}`}/>{signal.label}</span>)}</div></section><ErrorMessage error={error}/>{loading ? <Loading/> : <div className="grid">{games.map(game => <GameCard key={game.game_id} game={game}><div><div className="row justify-between"><strong className="text-xl">{(game.score * 100).toFixed(1)}% match</strong></div><div className="bar" role="img" aria-label={`Match contributions: content ${(game.content_score * .3 * 100).toFixed(1)}%, similar players ${(game.collab_score * .5 * 100).toFixed(1)}%, trending ${(game.trending_score * .2 * 100).toFixed(1)}%`}><div className="content-signal" style={{ width: `${game.content_score * .3 * 100}%` }}/><div className="collab-signal" style={{ width: `${game.collab_score * .5 * 100}%` }}/><div className="trending-signal" style={{ width: `${game.trending_score * .2 * 100}%` }}/></div><div className="stack text-xs muted">{signals.map(signal => <div key={signal.key}><span className={`dot ${signal.className}`}/>{signal.label}: {(game[signal.key] * 100).toFixed(1)}% signal</div>)}</div><p className="text-sm">{game.reason}</p></div></GameCard>)}</div>}{!loading && !error && !games.length && <p className="panel empty">No matches yet. Rate a few games and check back after recommendations are recomputed.</p>}</>;
+  useEffect(() => {
+    let active = true;
+    let pending = false;
+    async function refresh() {
+      if (pending || document.visibilityState === 'hidden') return;
+      pending = true;
+      try {
+        const result = await api('/api/recommendations', { cache: 'no-store' });
+        if (active) { setGames(result); setError(''); }
+      } catch (err) { if (active) setError(err.message); }
+      finally { pending = false; if (active) setLoading(false); }
+    }
+    refresh();
+    const timer = setInterval(refresh, 60000);
+    window.addEventListener('focus', refresh);
+    document.addEventListener('visibilitychange', refresh);
+    return () => {
+      active = false;
+      clearInterval(timer);
+      window.removeEventListener('focus', refresh);
+      document.removeEventListener('visibilitychange', refresh);
+    };
+  }, []);
+  return <><Intro label="Picked for you" title="Good games. Clear reasons.">Discover what’s next, with a recommendation you can understand.</Intro><section className="panel"><h2>How your match is made</h2><p className="muted">30% content + 50% similar players + 20% weekly trending. The bar shows each signal’s contribution to your total match score.</p><div className="row text-sm">{signals.map(signal => <span key={signal.key}><span className={`dot ${signal.className}`}/>{signal.label}</span>)}</div></section><ErrorMessage error={error}/>{loading ? <Loading/> : <div className="grid">{games.map(game => <GameCard key={game.game_id} game={game}><div><div className="row justify-between"><strong className="text-xl">{(game.score * 100).toFixed(1)}% match</strong></div><div className="bar" role="img" aria-label={`Match contributions: content ${(game.content_score * .3 * 100).toFixed(1)}%, similar players ${(game.collab_score * .5 * 100).toFixed(1)}%, trending ${(game.trending_score * .2 * 100).toFixed(1)}%`}><div className="content-signal" style={{ width: `${game.content_score * .3 * 100}%` }}/><div className="collab-signal" style={{ width: `${game.collab_score * .5 * 100}%` }}/><div className="trending-signal" style={{ width: `${game.trending_score * .2 * 100}%` }}/></div><div className="stack text-xs muted">{signals.map(signal => <div key={signal.key}><span className={`dot ${signal.className}`}/>{signal.label}: {(game[signal.key] * 100).toFixed(1)}% signal</div>)}</div><p className="text-sm">{game.reason}</p></div></GameCard>)}</div>}{!loading && !error && !games.length && <p className="panel empty">No matches yet. Rate a few games, then return here for updated recommendations.</p>}</>;
 }

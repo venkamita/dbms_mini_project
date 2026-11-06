@@ -6,6 +6,8 @@ Browse games, write reviews, save a wishlist, buy into a mock library, and see w
 
 Full design and test status: [PROJECT_SPEC.md](docs/PROJECT_SPEC.md).
 
+Complete implementation choices, database read/write flows, recommendation logic and all 18 course requirements: [PROJECT_IMPLEMENTATION_GUIDE.md](docs/PROJECT_IMPLEMENTATION_GUIDE.md).
+
 Final database drawings: [ER diagram](docs/er-diagram.png) ([editable SVG](docs/er-diagram.svg)) and [relational schema](docs/relational-schema.png) ([editable SVG](docs/relational-schema.svg)). See [DATABASE_MODEL.md](docs/DATABASE_MODEL.md) for constraints, key/participation notation, MongoDB associations, preserved originals and regeneration instructions.
 
 ## Prerequisites
@@ -69,6 +71,8 @@ As admin, open Analytics and click **Recompute recommendations**. Then log in as
 MongoDB sessions use relative dates. Re-run `init.js` when sessions are more than a few days old. Live database tests were skipped at the user's request. The offline orchestration test verifies the expected numbers using fixture outputs from database objects.
 
 ## Pages
+
+Recommendations refresh automatically on every authenticated request using current ratings, ownership, catalog and the seven-day activity window. The For You page refreshes on opening, every 60 seconds while visible, and when returning to the tab. Admin batch recomputation remains optional. This request-time approach suits the demo catalog; larger deployments should use incremental computation or invalidation to reduce database work.
 
 | Page | Access | Purpose |
 |---|---|---|

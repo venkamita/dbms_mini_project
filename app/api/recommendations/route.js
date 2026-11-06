@@ -5,7 +5,7 @@ import { computeForUser, readRecommendations } from '@/lib/recommend';
 import { attachGameMedia } from '@/lib/game-media';
 export const GET = route(async request => {
   const user = await requireUser(request);
-  let rows = await readRecommendations(user.user_id);
-  if (!rows.length) { await computeForUser(user.user_id); rows = await readRecommendations(user.user_id); }
-  return NextResponse.json(await attachGameMedia(rows));
+  await computeForUser(user.user_id);
+  const rows = await readRecommendations(user.user_id);
+  return NextResponse.json(await attachGameMedia(rows), { headers: { 'Cache-Control': 'private, no-store' } });
 });
